@@ -1,0 +1,45 @@
+{
+  "name": "buffer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "npm run build && node dist/index.js",
+    "build": "tsc",
+    "dev": "concurrently --kill-others \"tsc -w\" \"nodemon dist/index.js\"",
+    "test": "mocha --require ts-node/register 'test/**/*.test.ts'",
+    "tdd": "npm run test -- --watch-extensions ts --watch",
+    "stack:start": "node stack.js",
+    "stack:up": "node stack.js up",
+    "stack:stop": "docker-compose down",
+    "stack:restart": "npm run stack:stop && npm run stack:up"
+  },
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ulisesantana/buffer"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "mongodb": "^3.1.1",
+    "morgan": "^1.9.0",
+    "redis": "^2.8.0",
+    "typescript": "^2.9.2"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.1.4",
+    "@types/express": "^4.16.0",
+    "@types/mocha": "^2.2.43",
+    "@types/node": "^8.0.34",
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "concurrently": "^3.6.0",
+    "ip": "^1.1.5",
+    "mocha": "^4.0.1",
+    "nodemon": "^1.12.1",
+    "ts-node": "^3.3.0"
+  }
+}

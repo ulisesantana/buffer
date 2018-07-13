@@ -1,0 +1,24 @@
+version: '2'
+services:
+  mongo:
+    environment:
+        - MONGO_INITDB_ROOT_USERNAME=dev
+        - MONGO_INITDB_ROOT_PASSWORD=dev
+    image: 'mongo:3.4-jessie'
+    ports:
+      - '27017:27017'
+  redis:
+    dns: '192.168.1.1' 
+    image: 'redis:4'
+    ports:
+      - '6379:6379'
+  buffer:
+    environment:
+      - REDIS_HOST=${HOST_IP}
+      - MONGO_HOSTS=${HOST_IP}:27017
+    build: ./
+    ports:
+      - '3000:3000'
+volumes:
+  data:
+    external: true
