@@ -17,6 +17,7 @@ export function Buffer(s?:number): BufferIterator{
           return { done: false }
         } else {
           c.reset();
+          await redis.save(bufferKey, '');
           return { done: true, value: [...buffer] }
         }
       } catch (err) {

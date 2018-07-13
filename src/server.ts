@@ -11,7 +11,7 @@ export default function server() {
   const log = console.log;
   const api = express();
   const mongo = db('mongo', mongoCfg);
-  mongo.connect().then(() => {
+
     // Setting up the API
     api.use(morgan('dev'));
     api.use(bodyParser.urlencoded({
@@ -41,7 +41,6 @@ export default function server() {
 
     api.listen(PORT, () => log(`REST API listening on port ${PORT}.`));
     return api;
-  }).catch(err => console.error(err.toString()));
 
 }
 

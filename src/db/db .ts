@@ -1,5 +1,5 @@
-import MongoDB from './mongo';
-import Redis from './redis';
+import MongoAPI from './mongo.api';
+import RedisAPI from './redis.api';
 
 interface DbHandler {
   connect?(): Promise<any>,
@@ -18,15 +18,8 @@ export default function db(type: string, cfg: object): DbHandler {
 }
 
 function MongoHandler(cfg): DbHandler {
-  const mongo = MongoDB(cfg);
+  const mongo = new MongoAPI(cfg);
   return {
-    async connect() {
-      try {
-        return await mongo.connect();
-      } catch (err) {
-        throw err;
-      }
-    },
     async find(filter) {
       try {
         return await mongo.getRawData('messages', filter);
@@ -49,7 +42,7 @@ function MongoHandler(cfg): DbHandler {
 }
 
 function RedisHandler(cfg): DbHandler {
-  const redis = Redis(cfg);
+  const redis = new RedisAPI(cfg);
   return {
     async find(key) {
       try {
